@@ -293,7 +293,9 @@ We have deployed online demo in [Huggingface](https://huggingface.co/spaces/deep
 For the local gradio demo, you can run with the following command:
 
 ```
-pip install -e .[gradio]
+#for Mac
+pip install -e ".[gradio]"
+
 
 python demo/app_januspro.py
 ```
@@ -479,7 +481,8 @@ We have deployed online demo in [Huggingface](https://huggingface.co/spaces/deep
 For the local gradio demo, you can run with the following command:
 
 ```
-pip install -e .[gradio]
+#for mac
+pip install -e ".[gradio]"
 
 python demo/app.py
 ```
@@ -701,7 +704,7 @@ generate(
 For the local gradio demo, you can run with the following command:
 
 ```
-pip install -e .[gradio]
+pip install -e ".[gradio]"
 
 python demo/app_janusflow.py
 ```
