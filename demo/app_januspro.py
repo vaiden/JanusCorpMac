@@ -12,7 +12,7 @@ import time
 
 
 # Load model and processor
-model_path = "deepseek-ai/Janus-Pro-7B"
+model_path = "deepseek-ai/Janus-Pro-1B"
 config = AutoConfig.from_pretrained(model_path)
 language_config = config.language_config
 language_config._attn_implementation = 'eager'
@@ -86,8 +86,9 @@ def generate(input_ids,
              cfg_weight: float = 5,
              image_token_num_per_image: int = 576,
              patch_size: int = 16):
-    # Clear CUDA cache before generating
-    torch.cuda.empty_cache()
+    if torch.cuda.is_available():
+        # Clear CUDA cache before generating
+        torch.cuda.empty_cache()
     
     tokens = torch.zeros((parallel_size * 2, len(input_ids)), dtype=torch.int).to(device)
     for i in range(parallel_size * 2):
