@@ -293,9 +293,8 @@ We have deployed online demo in [Huggingface](https://huggingface.co/spaces/deep
 For the local gradio demo, you can run with the following command:
 
 ```
-#for Mac
+brew install protobuf sentencepiece pkg-config cmake
 pip install -e ".[gradio]"
-
 
 python demo/app_januspro.py
 ```
@@ -481,7 +480,7 @@ We have deployed online demo in [Huggingface](https://huggingface.co/spaces/deep
 For the local gradio demo, you can run with the following command:
 
 ```
-#for mac
+brew install protobuf sentencepiece pkg-config cmake
 pip install -e ".[gradio]"
 
 python demo/app.py
@@ -704,6 +703,7 @@ generate(
 For the local gradio demo, you can run with the following command:
 
 ```
+brew install protobuf sentencepiece pkg-config cmake
 pip install -e ".[gradio]"
 
 python demo/app_janusflow.py
