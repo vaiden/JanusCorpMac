@@ -1,15 +1,26 @@
 import gradio as gr
 import torch
+import os
 from transformers import AutoConfig, AutoModelForCausalLM
 from janus.models import MultiModalityCausalLM, VLChatProcessor
 from janus.utils.io import load_pil_images
 from PIL import Image
 
 import numpy as np
-import os
-import time
+import requests
+
+from unittest.mock import MagicMock
 # import spaces  # Import spaces for ZeroGPU compatibility
 
+
+# Disable SSL verification because of corporate proxy self signed certificate 
+if os.getenv('http_proxy') or os.getenv('https_proxy'):
+    old_session_init = requests.Session.__init__
+    def no_ssl_verify_init(self, *k, **kw):
+        old_session_init(self, *k, **kw)
+        self.verify = False
+    requests.Session.__init__ = no_ssl_verify_init
+    requests.urllib3.disable_warnings()
 
 # Load model and processor
 model_path = "deepseek-ai/Janus-Pro-1B"
@@ -246,5 +257,5 @@ with gr.Blocks() as demo:
         outputs=image_output
     )
 
-demo.launch(share=True)
+demo.launch(server_name="0.0.0.0", share=True)
 # demo.queue(concurrency_count=1, max_size=10).launch(server_name="0.0.0.0", server_port=37906, root_path="/path")
